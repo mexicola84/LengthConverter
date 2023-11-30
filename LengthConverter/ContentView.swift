@@ -85,7 +85,7 @@ struct ContentView: View {
                 }
                 
                 Section("Final Value") {
-                    Text("\(unitConverter) \(targetUnit)")
+                    Text("\(unitConverter.formatted()) \(targetUnit)")
                 }
             }
             .navigationTitle("LengthConverter")
