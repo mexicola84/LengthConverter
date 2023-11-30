@@ -9,33 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var initValue = 10.0
-    @State private var startUnit = "meters"
-    @State private var targetUnit = "feet"
+    @State private var startUnit = "m"
+    @State private var targetUnit = "ft."
     @FocusState private var lengthIsFocused: Bool
     
-    let units = ["millimeters", "centimeters", "meters", "kilometers", "inches", "feet", "yards", "miles"]
+    let units = ["mm", "cm", "m", "km", "in.", "ft.", "yd.", "mi."]
     
     var unitConverter: Double {
         let baseUnit = Measurement(value: initValue, unit: UnitLength.meters)
         var convertedValue: Double = 0
         
+        
         if targetUnit == startUnit {
             convertedValue = initValue
-        } else if targetUnit == "millimeters" {
+        } else if targetUnit == "mm" {
             convertedValue = baseUnit.converted(to: UnitLength.millimeters).value
-        } else if targetUnit == "centimeters" {
+        } else if targetUnit == "cm" {
             convertedValue = baseUnit.converted(to: UnitLength.centimeters).value
-        } else if targetUnit == "meters" {
+        } else if targetUnit == "m" {
             convertedValue = baseUnit.converted(to: UnitLength.meters).value
-        } else if targetUnit == "kilometers" {
+        } else if targetUnit == "km" {
             convertedValue = baseUnit.converted(to: UnitLength.kilometers).value
-        } else if targetUnit == "inches" {
+        } else if targetUnit == "in." {
             convertedValue = baseUnit.converted(to: UnitLength.inches).value
-        } else if targetUnit == "feet" {
+        } else if targetUnit == "ft." {
             convertedValue = baseUnit.converted(to: UnitLength.feet).value
-        } else if targetUnit == "yards" {
+        } else if targetUnit == "yd." {
             convertedValue = baseUnit.converted(to: UnitLength.yards).value
-        } else if targetUnit == "miles" {
+        } else if targetUnit == "mi." {
             convertedValue = baseUnit.converted(to: UnitLength.miles).value
         }
         
@@ -45,7 +46,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section {
+                Section ("Insert Value") {
                     TextField("Input Measure", value: $initValue, format: .number)
                         .keyboardType(.decimalPad)
                         .focused($lengthIsFocused)
@@ -54,16 +55,16 @@ struct ContentView: View {
                             Text("\($0)")
                         }
                     }
-                    .pickerStyle(.navigationLink)
+                    .pickerStyle(.segmented)
                 }
                 
-                Section("Convert to:") {
+                Section("Convert to") {
                     Picker("Target Unit", selection: $targetUnit) {
                         ForEach(units, id: \.self) {
                             Text("\($0)")
                         }
                     }
-                    .pickerStyle(.navigationLink)
+                    .pickerStyle(.segmented)
                 }
                 
                 Section("Final Value") {
