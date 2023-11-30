@@ -16,9 +16,26 @@ struct ContentView: View {
     let units = ["mm", "cm", "m", "km", "in.", "ft.", "yd.", "mi."]
     
     var unitConverter: Double {
-        let baseUnit = Measurement(value: initValue, unit: UnitLength.meters)
+        var baseUnit = Measurement(value: initValue, unit: UnitLength.meters)
         var convertedValue: Double = 0
         
+        if startUnit == "mm" {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.millimeters)
+        } else if startUnit == "cm" {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.centimeters)
+        } else if startUnit == "m" {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.meters)
+        } else if startUnit == "km" {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.kilometers)
+        } else if startUnit == "in." {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.inches)
+        } else if startUnit == "ft." {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.feet)
+        } else if startUnit == "yd." {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.yards)
+        } else if startUnit == "mi." {
+            baseUnit = Measurement(value: initValue, unit: UnitLength.miles)
+        }
         
         if targetUnit == startUnit {
             convertedValue = initValue
